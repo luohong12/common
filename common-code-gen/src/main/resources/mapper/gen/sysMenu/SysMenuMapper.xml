@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjjs.code.gen.mapper.sysMenu.SysMenuMapper">
+
+    <resultMap type="SysMenu" id="SysMenuResult">
+            <result property="id" column="id"/>
+            <result property="parentId" column="parent_id"/>
+            <result property="menuCode" column="menu_code"/>
+            <result property="menuName" column="menu_name"/>
+            <result property="menuIcon" column="menu_icon"/>
+            <result property="menuUrl" column="menu_url"/>
+            <result property="component" column="component"/>
+            <result property="seq" column="seq"/>
+            <result property="status" column="status"/>
+            <result property="createTime" column="create_time"/>
+            <result property="updateTime" column="update_time"/>
+            <result property="menuType" column="menu_type"/>
+            <result property="isSystem" column="is_system"/>
+            <result property="createBy" column="create_by"/>
+            <result property="isHide" column="is_hide"/>
+            <result property="isAcl" column="is_acl"/>
+            <result property="isCache" column="is_cache"/>
+            <result property="skipUrl" column="skip_url"/>
+            <result property="dataPath" column="data_path"/>
+    </resultMap>
+
+    <sql id="selectSysMenuVo">
+        select id, parent_id, menu_code, menu_name, menu_icon, menu_url, component, seq, status, create_time, update_time, menu_type, is_system, create_by, is_hide, is_acl, is_cache, skip_url, data_path
+        from sys_menu
+    </sql>
+
+    <select id="selectSysMenuList" parameterType="SysMenu" resultMap="SysMenuResult">
+        <include refid="selectSysMenuVo"/>
+        <where>
+                        <if test="parentId != null  and parentId != ''">
+                            and parent_id = #{parentId}
+                        </if>
+                        <if test="menuCode != null  and menuCode != ''">
+                            and menu_code = #{menuCode}
+                        </if>
+                        <if test="menuName != null  and menuName != ''">
+                            and menu_name like concat('%', #{menuName}, '%')
+                        </if>
+                        <if test="menuIcon != null  and menuIcon != ''">
+                            and menu_icon = #{menuIcon}
+                        </if>
+                        <if test="menuUrl != null  and menuUrl != ''">
+                            and menu_url = #{menuUrl}
+                        </if>
+                        <if test="component != null  and component != ''">
+                            and component = #{component}
+                        </if>
+                        <if test="seq != null ">
+                            and seq = #{seq}
+                        </if>
+                        <if test="status != null ">
+                            and status = #{status}
+                        </if>
+                        <if test="menuType != null  and menuType != ''">
+                            and menu_type = #{menuType}
+                        </if>
+                        <if test="isSystem != null ">
+                            and is_system = #{isSystem}
+                        </if>
+                        <if test="isHide != null ">
+                            and is_hide = #{isHide}
+                        </if>
+                        <if test="isAcl != null ">
+                            and is_acl = #{isAcl}
+                        </if>
+                        <if test="isCache != null ">
+                            and is_cache = #{isCache}
+                        </if>
+                        <if test="skipUrl != null  and skipUrl != ''">
+                            and skip_url = #{skipUrl}
+                        </if>
+                        <if test="dataPath != null  and dataPath != ''">
+                            and data_path = #{dataPath}
+                        </if>
+        </where>
+    </select>
+
+    <select id="selectSysMenuById" parameterType="String"
+            resultMap="SysMenuResult">
+            <include refid="selectSysMenuVo"/>
+            where id = #{id}
+    </select>
+
+    <insert id="insertSysMenu" parameterType="SysMenu">
+        insert into sys_menu
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+                    <if test="id != null">id,
+                    </if>
+                    <if test="parentId != null">parent_id,
+                    </if>
+                    <if test="menuCode != null">menu_code,
+                    </if>
+                    <if test="menuName != null">menu_name,
+                    </if>
+                    <if test="menuIcon != null">menu_icon,
+                    </if>
+                    <if test="menuUrl != null">menu_url,
+                    </if>
+                    <if test="component != null">component,
+                    </if>
+                    <if test="seq != null">seq,
+                    </if>
+                    <if test="status != null">status,
+                    </if>
+                    <if test="createTime != null">create_time,
+                    </if>
+                    <if test="updateTime != null">update_time,
+                    </if>
+                    <if test="menuType != null">menu_type,
+                    </if>
+                    <if test="isSystem != null">is_system,
+                    </if>
+                    <if test="createBy != null">create_by,
+                    </if>
+                    <if test="isHide != null">is_hide,
+                    </if>
+                    <if test="isAcl != null">is_acl,
+                    </if>
+                    <if test="isCache != null">is_cache,
+                    </if>
+                    <if test="skipUrl != null">skip_url,
+                    </if>
+                    <if test="dataPath != null">data_path,
+                    </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+                    <if test="id != null">#{id},
+                    </if>
+                    <if test="parentId != null">#{parentId},
+                    </if>
+                    <if test="menuCode != null">#{menuCode},
+                    </if>
+                    <if test="menuName != null">#{menuName},
+                    </if>
+                    <if test="menuIcon != null">#{menuIcon},
+                    </if>
+                    <if test="menuUrl != null">#{menuUrl},
+                    </if>
+                    <if test="component != null">#{component},
+                    </if>
+                    <if test="seq != null">#{seq},
+                    </if>
+                    <if test="status != null">#{status},
+                    </if>
+                    <if test="createTime != null">#{createTime},
+                    </if>
+                    <if test="updateTime != null">#{updateTime},
+                    </if>
+                    <if test="menuType != null">#{menuType},
+                    </if>
+                    <if test="isSystem != null">#{isSystem},
+                    </if>
+                    <if test="createBy != null">#{createBy},
+                    </if>
+                    <if test="isHide != null">#{isHide},
+                    </if>
+                    <if test="isAcl != null">#{isAcl},
+                    </if>
+                    <if test="isCache != null">#{isCache},
+                    </if>
+                    <if test="skipUrl != null">#{skipUrl},
+                    </if>
+                    <if test="dataPath != null">#{dataPath},
+                    </if>
+        </trim>
+    </insert>
+
+    <update id="updateSysMenu" parameterType="SysMenu">
+        update sys_menu
+        <trim prefix="SET" suffixOverrides=",">
+                    <if test="parentId != null">parent_id =
+                        #{parentId},
+                    </if>
+                    <if test="menuCode != null">menu_code =
+                        #{menuCode},
+                    </if>
+                    <if test="menuName != null">menu_name =
+                        #{menuName},
+                    </if>
+                    <if test="menuIcon != null">menu_icon =
+                        #{menuIcon},
+                    </if>
+                    <if test="menuUrl != null">menu_url =
+                        #{menuUrl},
+                    </if>
+                    <if test="component != null">component =
+                        #{component},
+                    </if>
+                    <if test="seq != null">seq =
+                        #{seq},
+                    </if>
+                    <if test="status != null">status =
+                        #{status},
+                    </if>
+                    <if test="createTime != null">create_time =
+                        #{createTime},
+                    </if>
+                    <if test="updateTime != null">update_time =
+                        #{updateTime},
+                    </if>
+                    <if test="menuType != null">menu_type =
+                        #{menuType},
+                    </if>
+                    <if test="isSystem != null">is_system =
+                        #{isSystem},
+                    </if>
+                    <if test="createBy != null">create_by =
+                        #{createBy},
+                    </if>
+                    <if test="isHide != null">is_hide =
+                        #{isHide},
+                    </if>
+                    <if test="isAcl != null">is_acl =
+                        #{isAcl},
+                    </if>
+                    <if test="isCache != null">is_cache =
+                        #{isCache},
+                    </if>
+                    <if test="skipUrl != null">skip_url =
+                        #{skipUrl},
+                    </if>
+                    <if test="dataPath != null">data_path =
+                        #{dataPath},
+                    </if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteSysMenuById" parameterType="String">
+        delete
+        from sys_menu where id = #{id}
+    </delete>
+
+    <delete id="deleteSysMenuByIds" parameterType="String">
+        delete from sys_menu where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

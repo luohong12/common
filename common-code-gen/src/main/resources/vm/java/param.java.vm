@@ -1,0 +1,33 @@
+package ${packageName}.domain.${className};
+
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import java.util.Date;
+#foreach($importPath in $extraImports)
+import ${importPath};
+#end
+
+#foreach($importPath in $baseImports)
+import ${importPath};
+#end
+
+/**
+ * @author ${author}
+ * @date ${datetime}
+ */
+@ApiModel(value = "${table.tableComment}", description = "${table.tableComment}")
+@Data
+public class ${ClassName}Param {
+#foreach($column in $columns)
+
+    @ApiModelProperty(value = "$column.columnComment")
+    #if($column.javaType == 'Date')
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    #end
+    private $column.javaType $column.javaField;
+#end
+}

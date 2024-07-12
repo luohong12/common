@@ -1,0 +1,19 @@
+package ${packageName}.domain.${className};
+
+import ${packageName}.domain.${className}.${ClassName};
+import ${packageName}.domain.${className}.${ClassName}BO;
+import ${packageName}.domain.${className}.${ClassName}Param;
+import ${packageName}.domain.${className}.${ClassName}PageParam;
+import com.zjjs.common.core.convert.BaseConverter;
+import org.mapstruct.Mapper;
+import org.mapstruct.factory.Mappers;
+
+/**
+ * @author ${author}
+ * @date ${datetime}
+ */
+@Mapper
+public interface ${ClassName}Converter extends BaseConverter<${ClassName}, ${ClassName}BO, ${ClassName}Param, ${ClassName}PageParam> {
+
+    ${ClassName}Converter INSTANCE = Mappers.getMapper(${ClassName}Converter.class);
+}

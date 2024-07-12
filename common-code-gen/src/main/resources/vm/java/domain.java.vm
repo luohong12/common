@@ -1,0 +1,45 @@
+package ${packageName}.domain.${className};
+
+#foreach ($import in $importList)
+import ${import};
+#end
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import org.apache.ibatis.type.Alias;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+#if($table.crud || $table.sub)
+import com.zjjs.common.core.web.domain.BaseEntity;
+#elseif($table.tree)
+import com.zjjs.common.core.web.domain.TreeEntity;
+#end
+
+/**
+ * ${functionName}对象 ${tableName}
+ *
+ * @author ${author}
+ * @date ${datetime}
+ */
+#if($table.crud || $table.sub)
+    #set($Entity="BaseEntity")
+#elseif($table.tree)
+    #set($Entity="TreeEntity")
+#end
+@Data
+@EqualsAndHashCode(callSuper = true)
+@Alias("${ClassName}")
+public class ${ClassName} extends ${Entity}{
+
+private static final long serialVersionUID=1L;
+
+#foreach ($column in $columns)
+    #if(!$table.isSuperColumn($column.javaField))
+    /** $column.columnComment */
+    private $column.javaType $column.javaField;
+    #end
+#end
+#if($table.sub)
+    /** $table.subTable.functionName信息 */
+    private List<${subClassName}> ${subclassName}List;
+#end
+}
